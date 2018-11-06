@@ -165,17 +165,14 @@ def quizIntent(session):
     logger.info(str(quiz))
     
     text += quiz["q"]
-    text += '<break time="0.5s" /> %s' % quiz["q"]
-    text += '<break time="10s"/>あと10秒です。<break time="7s"/>さん。<break time="1s"/>にい。<break time="1s"/>いち。<break time="1s"/>'
+    text += '<break time="1s" /> %s' % quiz["q"]
+    text2 = 'あと10秒です。<break time="6s"/>さん。<break time="1s"/>にい。<break time="1s"/>いち。<break time="1s"/>どうぞ'
 
-    text2 = 'もう一度だけ問題を言いますよ。'
-    text2 += quiz["q"]
-    text2 += '<break time="1s"/>さん。<break time="1s"/>にい。<break time="1s"/>いち。<break time="1s"/>'
     logger.info(text)
     logger.info(text2)
 
     session_attributes = {"quiz":quiz,"current":"quizIntent"}
-    return QuestionSpeech(text, session_attributes,text2).build()
+    return QuestionSpeech(text, session_attributes, text2).build()
 
 def answerIntent(intent, session):
     logger.info(str(intent))
