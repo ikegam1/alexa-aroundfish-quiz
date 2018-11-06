@@ -193,8 +193,11 @@ def answerIntent(intent, session):
         elif 'value' in slots['notanswerSlottwo']:
             answer = slots['notanswerSlottwo']['value']
     except Exception as e:
-        session_attributes = {"quiz":quiz,"current":"quizIntent"}
-        return fallback(session_attributes) 
+        if 'quiz' in session['attributes']:
+            session_attributes = {"quiz":quiz,"current":"quizIntent"}
+            return fallback(session_attributes) 
+        else:
+            return fallback() 
 
     try:
         if 'value' in slots['answerSlot']['resolutions']['resolutionsPerAuthority'][0]['values'][0]:
